@@ -1,0 +1,933 @@
+<!DOCTYPE html><html class="dark" lang="zh-CN"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Teddy Wong · AI Delivery</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;scroll-behavior:smooth;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}#reading-progress{width:0%;transition:width 0.1s ease-out;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-tertiary":"#00354a","surface-dim":"#0c1321","outline-variant":"#434655","on-surface-variant":"#c3c6d7","secondary-container":"#ec6a06","error-container":"#93000a","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#2a3040","surface-container-highest":"#2e3544","on-primary":"#002a78","background":"#0c1321","error":"#ffb4ab","primary-container":"#2563eb","inverse-primary":"#0053db","on-primary-container":"eeefff","surface-variant":"#2e3544","on-error-container":"#ffdad6","surface-bright":"#323949","on-primary-fixed-variant":"#003ea8","primary":"#b4c5ff","on-secondary-fixed":"#341100","on-tertiary-container":"#e1f2ff","on-primary-fixed":"#00174b","on-secondary":"#552100","on-tertiary-fixed-variant":"#004c69","on-secondary-fixed-variant":"#783200","primary-fixed":"#dbe1ff","on-background":"#dce2f6","inverse-surface":"#dce2f6","surface-tint":"#b4c5ff","outline":"#8d90a0","on-surface":"#dce2f6","surface-container-high":"#232a39","surface-container-lowest":"#070e1c","secondary":"#ffb690","on-tertiary-fixed":"#001e2c","on-error":"#690005","secondary-fixed-dim":"#ffb690","tertiary-fixed-dim":"#7bd0ff","surface-container":"#19202e","on-secondary-container":"#4a1c00","surface":"#0c1321","tertiary-fixed":"#c4e7ff","tertiary-container":"#00759f","tertiary":"#7bd0ff","surface-container-low":"#151b2a","secondary-fixed":"#ffdbca"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"margin-mobile":"1.25rem","space-sm":"0.5rem","space-md":"1rem","gutter":"1.5rem","gutter-mobile":"1rem","space-xs":"0.25rem","space-xl":"2.5rem","space-lg":"1.5rem","margin":"3rem"},fontFamily:{"headline-lg":["Inter"],"body-sm":["Inter"],"label-tag":["Inter"],"headline-sm":["Inter"],"title-md":["Inter"],"display-xl":["Inter"],"metric-display-mobile":["Inter"],"label-code":["JetBrains Mono"],"body-md":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"],"display-xl-mobile":["Inter"],"metric-display":["Inter"],"headline-lg-mobile":["Inter"]},fontSize:{"headline-lg":["40px",{lineHeight:"48px",letterSpacing:"-0.02em",fontWeight:"600"}],"body-sm":["13px",{lineHeight:"20px",fontWeight:"400"}],"label-tag":["11px",{lineHeight:"14px",letterSpacing:"0.06em",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"-0.01em",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",letterSpacing:"-0.005em",fontWeight:"600"}],"display-xl":["56px",{lineHeight:"64px",letterSpacing:"-0.03em",fontWeight:"700"}],"metric-display-mobile":["32px",{lineHeight:"38px",letterSpacing:"-0.02em",fontWeight:"700"}],"label-code":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"500"}],"body-md":["15px",{lineHeight:"24px",fontWeight:"400"}],"headline-md":["28px",{lineHeight:"36px",letterSpacing:"-0.015em",fontWeight:"600"}],"body-lg":["18px",{lineHeight:"28px",fontWeight:"400"}],"display-xl-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"700"}],"metric-display":["48px",{lineHeight:"52px",letterSpacing:"-0.03em",fontWeight:"700"}],"headline-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col justify-between relative"><!-- 1. Global Reading Progress Bar (Fixed Top) -->
+<div class="fixed top-0 left-0 right-0 h-[3px] z-[70] bg-surface-container-lowest/50 pointer-events-none"><div class="h-full bg-gradient-to-r from-primary-container via-tertiary to-secondary shadow-[0_0_10px_rgba(37,99,235,0.8)]" id="reading-progress" style="width: 0%;"></div></div><!-- 2. Sticky Glass Header with Scrollspy Nav -->
+<header class="fixed top-0 left-0 right-0 w-full z-50 backdrop-blur-xl bg-[#0c1321]/85 border-b border-slate-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.35)] transition-all duration-300"><div class="h-16 max-w-[1280px] mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><img alt="TW Monogram Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VvtcoLW3YyNscbkii9dWN0GtuSrZILicnCpsn0NXw3iCVWq_wElgWPeDyVYhpwJC9Yp_XjbQTOjyTokuyhUBAfRbMmeg_bKfUh66n3J5CcKugseX5oE9j-1lD-L4GM-XPYzSHG9UAqgUyQGnjS6UynmaMK96NWvH1JpGuhb2WRZI3SWYT3K-FKBq1VWxNplR5pNS4xr9EYaVM5Ie5-4PRrBzMbRkPWIPJKvIp4feLS9aHW5MfLxH8e35o"><a class="flex flex-col group" href="#home"><span class="font-title-md text-title-md tracking-tight text-on-surface font-semibold flex items-center gap-space-xs">Teddy Wong <span class="text-outline font-normal hidden sm:inline">|</span> <span class="text-primary font-headline-sm text-body-sm font-medium hidden sm:inline group-hover:text-tertiary transition-colors">AI Delivery</span></span><span class="font-label-code text-label-code text-on-surface-variant uppercase tracking-widest hidden lg:block">Cross-Border Enterprise Systems</span></a></div><nav class="hidden md:flex items-center gap-space-lg font-label-code text-body-sm" id="primary-nav"><a class="nav-link py-1 px-1 hover:text-on-surface transition-all border-b-2 text-primary font-semibold border-primary" data-section="home" href="#home">Home</a><a class="nav-link py-1 px-1 text-on-surface-variant hover:text-on-surface transition-all border-b-2 border-transparent" data-section="about" href="#about">About</a><a class="nav-link py-1 px-1 text-on-surface-variant hover:text-on-surface transition-all border-b-2 border-transparent" data-section="projects" href="#projects">Projects</a><a class="nav-link py-1 px-1 text-on-surface-variant hover:text-on-surface transition-all border-b-2 border-transparent" data-section="insights" href="#insights">Insights</a><a class="nav-link py-1 px-1 text-on-surface-variant hover:text-on-surface transition-all border-b-2 border-transparent" data-section="contact" href="#contact">Contact</a></nav><div class="flex items-center gap-space-md"><a class="relative inline-flex items-center justify-center h-10 px-space-md rounded bg-primary-container text-on-primary-container font-title-md text-body-sm font-medium transition-all duration-200 hover:bg-inverse-primary hover:text-on-primary hover:shadow-[0_0_20px_rgba(37,99,235,0.6)] focus:outline-none focus:ring-1 focus:ring-primary active:scale-[0.98]" href="#contact"><span class="">下载简历 / Download Resume</span></a><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant/60 hidden sm:block ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcqAsMWe7P8LukKDeebc-50uq7iT4BnSy3IY21QIN0XCp7yUBowUSOII70-ccwXI2NE8VCJ8g_0KwdPnc8TEDv-uKOyyvl9cCkRWvJQ41Ob8HB9lbDSHo1fj8Kd_4tDfBc8-swdq2o-44oDA1R1TYmNndKx-2oMeayfnLN6w8i7Ehbg9okr9bwYYIyoywPMsc8c5iqD-iDO7zKAHAHl61c-rXFCT4QqAAIiAHQSFRqD8OTzIbDlDEY"></div></div></header><!-- 3. Floating Quick Anchor Rail (Right Side Elevator Nav) -->
+<aside aria-label="楼层电梯导航" class="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end gap-3 group/rail pointer-events-auto"><div class="bg-surface-container-high/80 backdrop-blur-md border border-outline-variant/50 rounded-full py-3 px-2 flex flex-col items-center gap-4 shadow-xl"><a class="elevator-item relative flex items-center justify-center p-1 rounded-full group transition-all" data-target="home" href="#home" title="00 首页 (Hero)"><span class="elevator-dot rounded-full transition-all duration-300 bg-primary w-3.5 h-3.5 shadow-[0_0_10px_rgba(180,197,255,0.9)] ring-2 ring-primary-container"></span><span class="absolute right-8 px-2.5 py-1 rounded bg-surface-container-highest/95 border border-outline-variant/60 text-on-surface font-label-code text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg">00 首页 (Hero)</span></a><div class="w-[1px] h-3 bg-outline-variant/40"></div><a class="elevator-item relative flex items-center justify-center p-1 rounded-full group transition-all" data-target="about" href="#about" title="01 履历 (Timeline)"><span class="elevator-dot w-2.5 h-2.5 rounded-full bg-outline-variant transition-all duration-300"></span><span class="absolute right-8 px-2.5 py-1 rounded bg-surface-container-highest/95 border border-outline-variant/60 text-on-surface font-label-code text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg">01 履历 (Timeline)</span></a><div class="w-[1px] h-3 bg-outline-variant/40"></div><a class="elevator-item relative flex items-center justify-center p-1 rounded-full group transition-all" data-target="projects" href="#projects" title="02 战绩 (Projects)"><span class="elevator-dot w-2.5 h-2.5 rounded-full bg-outline-variant transition-all duration-300"></span><span class="absolute right-8 px-2.5 py-1 rounded bg-surface-container-highest/95 border border-outline-variant/60 text-on-surface font-label-code text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg">02 战绩 (Projects)</span></a><div class="w-[1px] h-3 bg-outline-variant/40"></div><a class="elevator-item relative flex items-center justify-center p-1 rounded-full group transition-all" data-target="insights" href="#insights" title="03 周报 (Insights)"><span class="elevator-dot w-2.5 h-2.5 rounded-full bg-outline-variant transition-all duration-300"></span><span class="absolute right-8 px-2.5 py-1 rounded bg-surface-container-highest/95 border border-outline-variant/60 text-on-surface font-label-code text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg">03 周报 (Insights)</span></a><div class="w-[1px] h-3 bg-outline-variant/40"></div><a class="elevator-item relative flex items-center justify-center p-1 rounded-full group transition-all" data-target="contact" href="#contact" title="04 联络 (Contact)"><span class="elevator-dot w-2.5 h-2.5 rounded-full bg-outline-variant transition-all duration-300"></span><span class="absolute right-8 px-2.5 py-1 rounded bg-surface-container-highest/95 border border-outline-variant/60 text-on-surface font-label-code text-[11px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none shadow-lg">04 联络 (Contact)</span></a></div></aside><!-- 4. Floating Back to Top Button -->
+<button aria-label="回到顶部" class="fixed right-5 bottom-6 z-40 p-3 rounded-full bg-surface-container-high/90 hover:bg-primary-container text-on-surface hover:text-on-primary-container border border-outline-variant/60 hover:border-primary shadow-2xl backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-3 group flex items-center gap-1.5" id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><span class="material-symbols-outlined text-xl transition-transform group-hover:-translate-y-0.5">arrow_upward</span><span class="font-label-code text-[11px] uppercase tracking-wider font-semibold pr-1 hidden sm:inline">Top</span></button><main class="w-full pt-16 bg-surface flex-1"><div class="flex flex-col w-full text-on-surface">
+<!-- ========================================== -->
+<!-- 1. HERO SECTION                            -->
+<!-- ========================================== -->
+<section class="relative w-full overflow-hidden bg-surface py-space-xl md:py-24 scroll-mt-24" id="home">
+<!-- Ambient subtle background glows -->
+<div class="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[340px] bg-primary-container/10 rounded-full blur-[120px]"></div>
+<div class="pointer-events-none absolute top-1/3 right-4 w-[400px] h-[280px] bg-secondary-container/10 rounded-full blur-[100px]"></div>
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin">
+<!-- Top Metatag Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface border border-outline-variant/40 shadow-sm mb-space-lg">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-code text-label-tag text-on-surface tracking-wider uppercase">🇭🇰 香港人 · AI 数据交付 · 跨文化团队管理</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<!-- Hero Text Content -->
+<div class="lg:col-span-7 flex flex-col items-start gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">
+              Teddy Wong <span class="text-primary font-normal">|</span> <span class="text-tertiary">AI Delivery Lead</span>
+</h1>
+<!-- Typewriter Dynamic Subtitle -->
+<div class="h-8 flex items-center">
+<span class="font-label-code text-body-md text-secondary font-medium tracking-wide" id="hero-typewriter"></span>
+<span class="inline-block w-2 h-5 bg-secondary-container ml-1 animate-pulse"></span>
+</div>
+</div>
+<p class="font-body-lg text-body-md md:text-body-lg text-on-surface-variant max-w-2xl leading-relaxed mt-space-xs">
+            深耕自动驾驶与具身智能全球化数据闭环，曾操盘 WeRide 国际头部客户交付（Anthropic、小红书、Calder、阿里具身），带领跨文化 50+ 人多语种团队建立吉隆坡与迪拜海外基地，致力于为下一代具身与通用 AI 打造极速、可靠的出海交付引擎。
+          </p>
+<!-- Action CTA Group -->
+<div class="flex flex-wrap items-center gap-space-md pt-space-sm">
+<a class="inline-flex items-center gap-2 px-space-lg h-11 rounded bg-primary-container text-on-primary-container font-title-md text-body-sm hover:bg-inverse-primary hover:text-on-primary shadow-[0_0_24px_rgba(37,99,235,0.4)] transition-all duration-200" href="#projects">
+<span class="material-symbols-outlined text-lg">explore</span>
+<span class="">探索核心战绩</span>
+</a>
+<a class="inline-flex items-center gap-2 px-space-lg h-11 rounded bg-surface-container-high text-on-surface font-title-md text-body-sm hover:bg-surface-bright border border-outline-variant/60 transition-all duration-200" href="#contact">
+<span class="material-symbols-outlined text-lg">chat_bubble</span>
+<span class="">获取战略简报 / 联系我</span>
+</a>
+</div>
+<!-- Language & Location pill -->
+<div class="flex items-center gap-space-sm mt-space-sm font-label-code text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-base text-primary">public</span>
+<span class="">Fluent in Cantonese (母语) / English (工作熟练) / Mandarin (流利)</span>
+</div>
+</div>
+<!-- Hero Portrait Box -->
+<div class="lg:col-span-5 flex justify-center lg:justify-end relative">
+<div class="relative w-72 sm:w-80 md:w-96 aspect-square rounded-xl overflow-hidden bg-surface-container-low shadow-2xl border border-outline-variant/40 group">
+<img alt="Teddy Wong Executive Portrait" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcqAsMWe7P8LukKDeebc-50uq7iT4BnSy3IY21QIN0XCp7yUBowUSOII70-ccwXI2NE8VCJ8g_0KwdPnc8TEDv-uKOyyvl9cCkRWvJQ41Ob8HB9lbDSHo1fj8Kd_4tDfBc8-swdq2o-44oDA1R1TYmNndKx-2oMeayfnLN6w8i7Ehbg9okr9bwYYIyoywPMsc8c5iqD-iDO7zKAHAHl61c-rXFCT4QqAAIiAHQSFRqD8OTzIbDlDEY">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-80"></div>
+<!-- Dynamic Floating Status Badge -->
+<div class="absolute bottom-4 left-4 right-4 bg-surface-container-highest/90 backdrop-blur-md px-3.5 py-2.5 rounded-lg border border-outline-variant/50 flex items-center gap-2.5 shadow-lg">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-sm text-on-surface font-semibold truncate">开放香港 AI 运营/交付负责人机会</span>
+<span class="font-label-code text-label-tag text-on-surface-variant">Senior Lead · Autonomous &amp; AI Operations</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3 Large Stat Impact Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg mt-space-xl">
+<!-- Stat Card 1 -->
+<div class="relative overflow-hidden p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 shadow-md hover:border-primary/40 transition-all duration-300">
+<div class="absolute top-3 right-4 font-label-code text-label-tag text-tertiary">NODE 01</div>
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-on-surface font-bold counter" data-target="2">2</span>
+<span class="font-headline-sm text-headline-sm text-primary">个</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold mt-1">海外基地从 0 到 1 筹备复制</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">选址、法务合规、双语团队组建到现场 SOP 极速交付体系（吉隆坡 &amp; 迪拜落地）</p>
+</div>
+<!-- Stat Card 2 -->
+<div class="relative overflow-hidden p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 shadow-md hover:border-secondary/40 transition-all duration-300">
+<div class="absolute top-3 right-4 font-label-code text-label-tag text-secondary">TEAM 02</div>
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-on-surface font-bold counter" data-target="50">50</span>
+<span class="font-headline-sm text-headline-sm text-secondary">+ 人</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold mt-1">跨文化团队直属与矩阵管理</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">统筹英语、马来语、阿拉伯语等多语种标注专家、评测架构师及现场运维骨干</p>
+</div>
+<!-- Stat Card 3 -->
+<div class="relative overflow-hidden p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 shadow-md hover:border-primary/40 transition-all duration-300">
+<div class="absolute top-3 right-4 font-label-code text-label-tag text-tertiary">SCALE 03</div>
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-on-surface font-bold counter" data-target="130">130</span>
+<span class="font-headline-sm text-headline-sm text-primary">万+</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold mt-1">核心项目单体操盘额度 (RMB)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">高规格商用 LLM 对齐评测与具身智能高精空间多模态数据集零差错交付</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 2. ABOUT SECTION                           -->
+<!-- ========================================== -->
+<section class="w-full bg-surface-container-low py-space-xl border-t border-outline-variant/30 scroll-mt-24" id="about">
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin">
+<!-- Section Header -->
+<div class="flex flex-col gap-space-xs max-w-3xl mb-space-xl">
+<div class="inline-flex items-center gap-2 font-label-code text-label-tag text-secondary uppercase tracking-widest">
+<span class="">[ 01 / 跨界自驱力 ]</span>
+<span class="w-8 h-[1px] bg-secondary-container"></span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">
+          跨界履历时间线 · 终身学习者与破局者
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          跨界不是偏离，而是将超五星服务敏锐度、大宗商业谈判力、高压创业韧性与自驱 AI 全栈能力融会贯通，塑造成今日极速破局、敢打硬仗的国际交付操盘手。
+        </p>
+</div>
+<!-- Timeline Component -->
+<div class="relative pl-6 md:pl-10 flex flex-col gap-space-lg before:content-[''] before:absolute before:left-[11px] md:before:left-[19px] before:top-3 before:bottom-3 before:w-[2px] before:bg-outline-variant/40">
+<!-- Timeline Item 1 -->
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[46px] top-1.5 w-4 h-4 rounded-full bg-surface border-2 border-secondary group-hover:scale-125 transition-transform"></div>
+<div class="p-space-lg rounded-xl bg-surface-container border border-outline-variant/40 hover:border-secondary/50 transition-all">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-space-xs">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-label-tag font-label-code bg-secondary-container/20 text-secondary">PHASE 01 · 国际底色</span>
+<span class="font-label-code text-body-sm text-outline">瑞士 · 洛桑/格里昂标准体系</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">瑞士顶级酒店管理 (Swiss Hotel Management)</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface-variant mt-2 leading-relaxed">
+              在超五星级全球化严苛标准下浸润，锻造了对极致客户体验、跨文化沟通同理心与全球化SOP执行细节的敏锐触觉。建立起“将复杂混乱服务标准化、流程化、可度量化”的底层肌肉记忆。
+            </p>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[46px] top-1.5 w-4 h-4 rounded-full bg-surface border-2 border-primary group-hover:scale-125 transition-transform"></div>
+<div class="p-space-lg rounded-xl bg-surface-container border border-outline-variant/40 hover:border-primary/50 transition-all">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-space-xs">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-label-tag font-label-code bg-primary-container/20 text-primary">PHASE 02 · 商业攻坚</span>
+<span class="font-label-code text-body-sm text-outline">大湾区 · 核心商业地产</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">头部商业地产大宗销售 (Commercial Real Estate)</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface-variant mt-2 leading-relaxed">
+              操盘数千万级大宗资产谈判，深度对接政企决策层与高净值投资人。淬炼出在多方博弈中精准识别痛点、对齐商业价值、控制商务风险并推动重大合约闭环的能力。
+            </p>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[46px] top-1.5 w-4 h-4 rounded-full bg-surface border-2 border-secondary group-hover:scale-125 transition-transform"></div>
+<div class="p-space-lg rounded-xl bg-surface-container border border-outline-variant/40 hover:border-secondary/50 transition-all">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-space-xs">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-label-tag font-label-code bg-secondary-container/20 text-secondary">PHASE 03 · 极压韧性</span>
+<span class="font-label-code text-body-sm text-outline">实体运营 · 创始人闭环</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">实体餐饮创业操盘人 (F&amp;B Entrepreneurship)</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface-variant mt-2 leading-relaxed">
+              作为独立创业者亲历全流程：现金流周转、供应链突发中断响应、一线员工梯队激励与危机公关。在极低容错率与实体高压下历练出强大的心理抗压韧性与“成本-时效-质量”的动态平衡调度力。
+            </p>
+</div>
+</div>
+<!-- Timeline Item 4 -->
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[46px] top-1.5 w-4 h-4 rounded-full bg-surface border-2 border-tertiary group-hover:scale-125 transition-transform"></div>
+<div class="p-space-lg rounded-xl bg-surface-container border border-outline-variant/40 hover:border-tertiary/50 transition-all">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-space-xs">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-label-tag font-label-code bg-tertiary-container/30 text-tertiary">PHASE 04 · 自驱破局</span>
+<span class="font-label-code text-body-sm text-outline">全栈进修 · AI Agent &amp; LLM</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Gap Year 深度自学 AI &amp; 全栈工程 (Self-driven AI Mastery)</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface-variant mt-2 leading-relaxed">
+              主动跳出舒适区展开高强度技术攻坚，系统攻克 LLM 评测标准、Agent 自动化工作流、Python 数据清洗及多模态数据标注架构。具备与算法团队、研究员同频对话的工程底蕴，打破商务交付与技术实现间的黑盒隔阂。
+            </p>
+</div>
+</div>
+<!-- Timeline Item 5 -->
+<div class="relative group">
+<div class="absolute -left-[30px] md:-left-[46px] top-1.5 w-4 h-4 rounded-full bg-surface border-2 border-emerald-400 group-hover:scale-125 transition-transform"></div>
+<div class="p-space-lg rounded-xl bg-surface-container border border-outline-variant/40 hover:border-emerald-500/50 transition-all">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-space-xs">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-label-tag font-label-code bg-emerald-950/60 text-emerald-400 border border-emerald-800/40">PHASE 05 · 现役实战</span>
+<span class="font-label-code text-body-sm text-outline">文远知行 (WeRide) · 全球交付线</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">WeRide 海外交付与基地筹建 (Global AI Delivery Lead)</h3>
+<p class="font-body-md text-body-sm md:text-body-md text-on-surface-variant mt-2 leading-relaxed">
+              奔赴海外一线现场拓荒，带领多语种团队高质承接 Anthropic、Calder、小红书、阿里具身等国际巨头核心标杆项目；主导吉隆坡与迪拜交付中心从零到一的选址合规、招聘考核与高并发交付落成。
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 3. PROJECTS SECTION                        -->
+<!-- ========================================== -->
+<section class="w-full bg-surface py-space-xl border-t border-outline-variant/30 scroll-mt-24" id="projects">
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin">
+<!-- Section Header -->
+<div class="flex flex-col gap-space-xs max-w-3xl mb-space-xl">
+<div class="inline-flex items-center gap-2 font-label-code text-label-tag text-primary uppercase tracking-widest">
+<span class="">[ 02 / 实战标杆 ]</span>
+<span class="w-8 h-[1px] bg-primary-container"></span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">
+          6 大核心战绩 · 全球数据交付与基地建设
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          点击任意案例卡片查看基于 STAR 模型（Situation, Task, Action, Result）的深度交付复盘与工程方法论。
+        </p>
+</div>
+<!-- 6 Interactive Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- Card 1 -->
+<div class="p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 flex flex-col justify-between hover:border-primary/60 transition-all duration-300 group hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">大语言模型评测</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-primary-container/20 text-primary">国际顶级客户</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-secondary-container/20 text-secondary">30天保交付</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+              Anthropic 首月交付标杆
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              面对硅谷顶级大模型客户严苛的多维度事实性（Factuality）与安全对齐标准，在无现成经验情况下 30 天内搭建全链路交付体系。
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-code text-label-tag text-outline">交付结果</span>
+<span class="font-title-md text-title-md text-primary font-bold">100% 按期 / 99.4% 通过率</span>
+</div>
+<button class="inline-flex items-center gap-1 font-label-code text-body-sm text-secondary hover:underline cursor-pointer" onclick="openModal('anthropic')">
+<span class="">STAR 复盘</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 flex flex-col justify-between hover:border-secondary/60 transition-all duration-300 group hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">海外拓荒</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-secondary-container/20 text-secondary">跨文化招聘</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-primary-container/20 text-primary">合规落地</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+              吉隆坡海外基地从 0 到 1 筹建
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              单身赴马拓荒，45天内完成境外实体合规、职场选址装修、IT专线搭建及首批 30 人多语种团队招聘实训并如期运转。
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-code text-label-tag text-outline">交付结果</span>
+<span class="font-title-md text-title-md text-secondary font-bold">45天全流程上岗 / 零合规风险</span>
+</div>
+<button class="inline-flex items-center gap-1 font-label-code text-body-sm text-secondary hover:underline cursor-pointer" onclick="openModal('kl-base')">
+<span class="">STAR 复盘</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 flex flex-col justify-between hover:border-primary/60 transition-all duration-300 group hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">流程重构</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-primary-container/20 text-primary">SOP 智能化</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary">人效翻倍</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+              外包标注与评测团队人效翻倍
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              重构外包质量反馈闭环，利用自动化校验脚本与多阶梯抽检算法切入，打破外包人员“高返工、低效率”困境。
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-code text-label-tag text-outline">交付结果</span>
+<span class="font-title-md text-title-md text-primary font-bold">人效 +118% / 返工降至 1.8%</span>
+</div>
+<button class="inline-flex items-center gap-1 font-label-code text-body-sm text-secondary hover:underline cursor-pointer" onclick="openModal('efficiency')">
+<span class="">STAR 复盘</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 flex flex-col justify-between hover:border-tertiary/60 transition-all duration-300 group hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">具身智能</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary">多模态空间数据</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-primary-container/20 text-primary">高精采集</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-tertiary transition-colors">
+              Calder 具身智能多模态交付
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              针对机械臂物理交互轨迹与高精真实场景 3D 点云语义，制定严苛的空间标定公差 SOP 并指导跨国数据闭环。
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-code text-label-tag text-outline">交付结果</span>
+<span class="font-title-md text-title-md text-tertiary font-bold">空间毫米级精度 / 零批次拒收</span>
+</div>
+<button class="inline-flex items-center gap-1 font-label-code text-body-sm text-secondary hover:underline cursor-pointer" onclick="openModal('calder')">
+<span class="">STAR 复盘</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 flex flex-col justify-between hover:border-secondary/60 transition-all duration-300 group hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">极限吞吐</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-secondary-container/20 text-secondary">多语种音频</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-primary-container/20 text-primary">高并发质检</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-secondary transition-colors">
+              Bodhimind 月 5000 小时交付标杆
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              面对海量多语种音频数据清洗与高精标注峰值，搭建弹性排班与分布式流水质检，保质保量完成吞吐奇迹。
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-code text-label-tag text-outline">交付结果</span>
+<span class="font-title-md text-title-md text-secondary font-bold">连续3月峰值达标 / 100% 续约</span>
+</div>
+<button class="inline-flex items-center gap-1 font-label-code text-body-sm text-secondary hover:underline cursor-pointer" onclick="openModal('bodhimind')">
+<span class="">STAR 复盘</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 flex flex-col justify-between hover:border-emerald-500/60 transition-all duration-300 group hover:-translate-y-1">
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-wrap gap-1.5">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">模块化复制</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-400">中东本地化</span>
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-primary-container/20 text-primary">阿语评测</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-emerald-400 transition-colors">
+              迪拜海外中东交付基地快速复制
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              沉淀吉隆坡经验形成《海外交付基地拓荒标准化工具包》，快速在阿联酋迪拜建立具有阿拉伯语特色交付能力的第二据点。
+            </p>
+</div>
+<div class="mt-space-lg pt-space-md border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-code text-label-tag text-outline">交付结果</span>
+<span class="font-title-md text-title-md text-emerald-400 font-bold">筹备周期缩短 40% / 零摩擦启动</span>
+</div>
+<button class="inline-flex items-center gap-1 font-label-code text-body-sm text-secondary hover:underline cursor-pointer" onclick="openModal('dubai-base')">
+<span class="">STAR 复盘</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 4. STAR DETAIL MODAL                       -->
+<!-- ========================================== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden transition-opacity duration-300" id="star-modal">
+<div class="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto bg-surface-container-high rounded-xl border border-outline-variant/60 shadow-2xl p-6 md:p-8 flex flex-col gap-6">
+<!-- Close Button -->
+<button class="absolute top-5 right-5 text-on-surface-variant hover:text-on-surface p-1 rounded-full bg-surface-container border border-outline-variant/40 hover:bg-surface-variant transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+<!-- Modal Header -->
+<div class="flex flex-col gap-2 border-b border-outline-variant/40 pb-4 pr-8">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-label-tag px-2.5 py-0.5 rounded bg-primary-container text-on-primary-container" id="modal-tag">STAR CASE STUDY</span>
+<span class="font-label-code text-label-tag text-on-surface-variant" id="modal-client">WeRide Global Delivery</span>
+</div>
+<h3 class="font-headline-md text-headline-sm md:text-headline-md text-on-surface font-bold" id="modal-title">项目名称</h3>
+</div>
+<!-- STAR Content Body -->
+<div class="flex flex-col gap-4">
+<!-- S -->
+<div class="p-3.5 rounded-lg bg-surface-container border-l-4 border-primary">
+<span class="font-label-code text-label-tag text-primary font-bold">S · 业务背景 (Situation)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed" id="modal-situation">...</p>
+</div>
+<!-- T -->
+<div class="p-3.5 rounded-lg bg-surface-container border-l-4 border-secondary">
+<span class="font-label-code text-label-tag text-secondary font-bold">T · 核心任务 (Task)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed" id="modal-task">...</p>
+</div>
+<!-- A -->
+<div class="p-3.5 rounded-lg bg-surface-container border-l-4 border-tertiary">
+<span class="font-label-code text-label-tag text-tertiary font-bold">A · 关键行动 (Action)</span>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed space-y-1" id="modal-action">...</div>
+</div>
+<!-- R -->
+<div class="p-3.5 rounded-lg bg-surface-container border-l-4 border-emerald-400">
+<span class="font-label-code text-label-tag text-emerald-400 font-bold">R · 交付成果 (Result)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed font-semibold" id="modal-result">...</p>
+</div>
+</div>
+<!-- Footer Insight & Quote -->
+<div class="p-4 rounded-lg bg-surface-container-low border border-outline-variant/30 flex flex-col gap-2">
+<span class="font-label-code text-label-tag text-secondary font-semibold uppercase">💡 操盘交付心得与方法论沉淀</span>
+<p class="font-body-sm text-body-sm text-on-surface italic" id="modal-learning">...</p>
+</div>
+<div class="flex justify-end pt-2">
+<button class="px-5 py-2 rounded bg-surface-container text-on-surface hover:bg-surface-variant text-body-sm font-medium transition-colors" onclick="closeModal()">
+          关闭复盘
+        </button>
+</div>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- 5. INDUSTRY INSIGHTS SECTION               -->
+<!-- ========================================== -->
+<section class="w-full bg-surface-container-low py-space-xl border-t border-outline-variant/30 scroll-mt-24" id="insights">
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin">
+<!-- Section Header -->
+<div class="flex flex-col gap-space-xs max-w-3xl mb-space-xl">
+<div class="inline-flex items-center gap-2 font-label-code text-label-tag text-secondary uppercase tracking-widest">
+<span class="">[ 03 / 战略洞察 ]</span>
+<span class="w-8 h-[1px] bg-secondary-container"></span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">
+          AI 行业出海与工程交付周报精选
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          不做二手新闻的搬运工，专注提炼前沿模型演进对企业落地、出海合规与数据供应链的本质启发。
+        </p>
+</div>
+<!-- 3 Insights Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Insight 1 -->
+<div class="p-space-lg rounded-xl bg-surface-container border border-outline-variant/40 flex flex-col justify-between hover:border-primary/50 transition-all duration-300">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-primary-container/20 text-primary">前沿模型与具身智能</span>
+<span class="font-label-code text-label-tag text-outline">2025 Q1 观察</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold leading-snug">
+              Anthropic Claude 3.5 Sonnet 与具身 Agent：数据质量已替代数据规模成为核心护城河
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              随着前沿模型推理能力跃升，海量通用网页抓取数据的边际收益几乎归零。模型机构正迫切寻求拥有深层专业领域逻辑、强因果链推理与真实物理交互的微调数据。
+            </p>
+</div>
+<!-- Callout Box -->
+<div class="mt-space-lg p-3 rounded-lg bg-surface-container-high border-l-2 border-primary">
+<span class="font-label-code text-label-tag text-primary block mb-1">对企业出海交付的启发：</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              交付团队必须从“劳务密集型标注”转变为“领域专家型数据工程”，深度建立具备工程调试与代码复现能力的评测 pipeline。
+            </p>
+</div>
+</div>
+<!-- Insight 2 -->
+<div class="p-space-lg rounded-xl bg-surface-container border border-outline-variant/40 flex flex-col justify-between hover:border-secondary/50 transition-all duration-300">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-secondary-container/20 text-secondary">出海基地与合规</span>
+<span class="font-label-code text-label-tag text-outline">东南亚 &amp; 中东</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold leading-snug">
+              东南亚与中东 AI 基建出海潮：地缘政治与数据主权下的团队本地化策略
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              中国企业赴东南亚（马/新/印尼）及中东（阿联酋/沙特）不再只是输出算力，更需直面当地劳工法、文化宗教禁忌以及主权级数据出境审计红线。
+            </p>
+</div>
+<!-- Callout Box -->
+<div class="mt-space-lg p-3 rounded-lg bg-surface-container-high border-l-2 border-secondary">
+<span class="font-label-code text-label-tag text-secondary block mb-1">对企业出海交付的启发：</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              香港团队天然拥有英美法系理解力与内地工程协同优势，应扮演跨境节点枢纽，确保交付中心在第一天即通过 SOC2 及本土合规体系。
+            </p>
+</div>
+</div>
+<!-- Insight 3 -->
+<div class="p-space-lg rounded-xl bg-surface-container border border-outline-variant/40 flex flex-col justify-between hover:border-tertiary/50 transition-all duration-300">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-tag px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary">交付架构演化</span>
+<span class="font-label-code text-label-tag text-outline">RLHF 范式升级</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface font-bold leading-snug">
+              从 RLHF 到 RLAIF：人类评测专家角色如何向 Domain Expert 高阶演进
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              基础文本偏好标注已被自动化模型对齐迅速替代。真正稀缺的是具身控制、金融量化、复杂法律交叉场景下能够精准捕捉“模型幻觉临界点”的红队攻防专家。
+            </p>
+</div>
+<!-- Callout Box -->
+<div class="mt-space-lg p-3 rounded-lg bg-surface-container-high border-l-2 border-tertiary">
+<span class="font-label-code text-label-tag text-tertiary block mb-1">对企业出海交付的启发：</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              交付负责人需提前沉淀自动化质检 Agent，以机审清洗初阶噪音，将高薪专家人效 100% 聚焦在 5% 的 Corner Cases 与前沿策略上。
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 6. CONTACT SECTION                         -->
+<!-- ========================================== -->
+<section class="w-full bg-surface py-space-xl border-t border-outline-variant/30 relative scroll-mt-24" id="contact">
+<div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin">
+<!-- Section Header -->
+<div class="flex flex-col gap-space-xs max-w-2xl mb-space-xl">
+<div class="inline-flex items-center gap-2 font-label-code text-label-tag text-primary uppercase tracking-widest">
+<span class="">[ 04 / 携手共赢 ]</span>
+<span class="w-8 h-[1px] bg-primary-container"></span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold tracking-tight">
+          Let's Connect · 开启战略交流
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          深耕大湾区，放眼全球。热忱期待与香港、深圳及国际 AI 创新团队、具身智能领航者共话业务出海与高质交付。
+        </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Left: Executive Profile Card & Quick Actions -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<div class="p-space-lg rounded-xl bg-surface-container-high border border-outline-variant/40 flex flex-col gap-space-md shadow-lg">
+<div class="flex items-center gap-space-md">
+<img alt="Teddy Wong" class="w-16 h-16 rounded-full object-cover border-2 border-primary/50 shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcqAsMWe7P8LukKDeebc-50uq7iT4BnSy3IY21QIN0XCp7yUBowUSOII70-ccwXI2NE8VCJ8g_0KwdPnc8TEDv-uKOyyvl9cCkRWvJQ41Ob8HB9lbDSHo1fj8Kd_4tDfBc8-swdq2o-44oDA1R1TYmNndKx-2oMeayfnLN6w8i7Ehbg9okr9bwYYIyoywPMsc8c5iqD-iDO7zKAHAHl61c-rXFCT4QqAAIiAHQSFRqD8OTzIbDlDEY">
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Teddy Wong · 王俊</h3>
+<span class="font-body-sm text-body-sm text-primary font-medium">AI 交付负责人 / 国际基地操盘手</span>
+<span class="font-label-code text-label-tag text-outline mt-0.5">Hong Kong Native · Global Operations</span>
+</div>
+</div>
+<!-- Location & Availability Pill -->
+<div class="p-3 rounded-lg bg-surface-container border border-outline-variant/30 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5">pin_drop</span>
+<div class="flex flex-col font-body-sm text-body-sm text-on-surface-variant">
+<span class="text-on-surface font-medium">📍 常驻深圳 · 随时可赴香港开展工作</span>
+<span class="">开放香港 / 大湾区 AI 运营交付总监及出海基地统筹机会</span>
+</div>
+</div>
+<!-- Direct Contact Links -->
+<div class="flex flex-col gap-space-sm pt-2">
+<a class="flex items-center justify-between p-3 rounded bg-surface hover:bg-surface-variant transition-colors border border-outline-variant/30 group" href="mailto:contact@teddywong.ai">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-lg">mail</span>
+<span class="font-label-code text-body-sm text-on-surface">contact@teddywong.ai</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-base">arrow_outward</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded bg-surface hover:bg-surface-variant transition-colors border border-outline-variant/30 group" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-lg">work</span>
+<span class="font-label-code text-body-sm text-on-surface">LinkedIn Profile (Teddy Wong)</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-secondary transition-colors text-base">arrow_outward</span>
+</a>
+<button class="flex items-center justify-between p-3 rounded bg-surface hover:bg-surface-variant transition-colors border border-outline-variant/30 group text-left cursor-pointer" onclick="toggleWechatModal()">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-emerald-400 text-lg">chat</span>
+<span class="font-label-code text-body-sm text-on-surface">WeChat / 微信二维码即刻沟通</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-emerald-400 transition-colors text-base">qr_code_2</span>
+</button>
+</div>
+<!-- Download CV Button -->
+<a class="w-full py-2.5 rounded bg-surface-variant hover:bg-outline-variant/40 text-on-surface font-title-md text-body-sm flex items-center justify-center gap-2 transition-colors border border-outline-variant/50" href="mailto:contact@teddywong.ai?subject=Request%20Teddy%20Wong%20CV">
+<span class="material-symbols-outlined text-base">download</span>
+<span class="">获取完整中英文 PDF 履历</span>
+</a>
+</div>
+</div>
+<!-- Right: Interactive Briefing Form -->
+<div class="lg:col-span-7">
+<div class="p-space-lg md:p-8 rounded-xl bg-surface-container-high border border-outline-variant/40 shadow-lg">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">send</span>
+<span class="">预约沟通 / 战略简报咨询</span>
+</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-space-lg">
+              请填写您的联系需求，我将在 12 小时内亲自回复或安排电话会议。
+            </p>
+<form class="flex flex-col gap-space-md" id="contact-form" onsubmit="handleFormSubmit(event)">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-code text-label-tag text-on-surface-variant">姓名 / Name *</label>
+<input class="h-10 px-3 rounded bg-surface border border-outline-variant/40 text-on-surface text-body-sm focus:outline-none focus:border-primary transition-colors" placeholder="例如：李先生 / Mr. Wang" required="" type="text">
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-code text-label-tag text-on-surface-variant">所在机构 / Organization *</label>
+<input class="h-10 px-3 rounded bg-surface border border-outline-variant/40 text-on-surface text-body-sm focus:outline-none focus:border-primary transition-colors" placeholder="公司 / 创投机构 / 实验室" required="" type="text">
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-code text-label-tag text-on-surface-variant">电子邮箱 / Email *</label>
+<input class="h-10 px-3 rounded bg-surface border border-outline-variant/40 text-on-surface text-body-sm focus:outline-none focus:border-primary transition-colors" placeholder="work-email@company.com" required="" type="email">
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-code text-label-tag text-on-surface-variant">咨询主题 / Topic *</label>
+<select class="h-10 px-3 rounded bg-surface border border-outline-variant/40 text-on-surface text-body-sm focus:outline-none focus:border-primary transition-colors">
+<option value="hiring">团队招聘 / 全职机会沟通 (香港/大湾区)</option>
+<option value="delivery">海外交付中心筹建咨询 (东南亚/中东)</option>
+<option value="embodied">具身智能 / 自动驾驶数据闭环合作</option>
+<option value="advisory">战略顾问 / 业务交流</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-code text-label-tag text-on-surface-variant">详细留言 / Brief Message *</label>
+<textarea class="p-3 rounded bg-surface border border-outline-variant/40 text-on-surface text-body-sm focus:outline-none focus:border-primary transition-colors" placeholder="请简述您目前的业务痛点、期望沟通的具体事项或邀约形式..." required="" rows="4"></textarea>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-code text-label-tag text-outline">🔒 严格保护信息与商业隐私</span>
+<button class="inline-flex items-center gap-2 px-space-lg h-10 rounded bg-primary-container text-on-primary-container font-title-md text-body-sm hover:bg-inverse-primary transition-all" id="submit-btn" type="submit">
+<span class="">立即发送信息</span>
+<span class="material-symbols-outlined text-base">send</span>
+</button>
+</div>
+<div class="hidden p-3 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 font-body-sm text-center" id="form-success-msg">
+                ✅ 感谢您的留言！消息已成功发送至 Teddy 的优先收件箱，将尽快与您取得联系。
+              </div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WeChat QR Popup Modal -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden" id="wechat-modal">
+<div class="relative w-full max-w-sm p-6 rounded-xl bg-surface-container-high border border-outline-variant/60 shadow-2xl flex flex-col items-center text-center gap-4">
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface p-1" onclick="toggleWechatModal()">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<div class="w-12 h-12 rounded-full bg-emerald-950/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+<span class="material-symbols-outlined text-2xl">chat</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-title-md text-on-surface font-semibold">Teddy Wong 个人微信</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">微信号：TeddyWong_AI</p>
+</div>
+<div class="w-48 h-48 bg-surface-container rounded-lg border border-outline-variant/40 p-3 flex flex-col items-center justify-center">
+<!-- Minimal SVG Simulated QR code -->
+<svg class="w-full h-full text-primary" fill="currentColor" viewBox="0 0 100 100">
+<path d="M0,0 h30 v30 h-30 z M4,4 h22 v22 h-22 z M8,8 h14 v14 h-14 z"></path>
+<path d="M70,0 h30 v30 h-30 z M74,4 h22 v22 h-22 z M78,8 h14 v14 h-14 z"></path>
+<path d="M0,70 h30 v30 h-30 z M4,74 h22 v22 h-22 z M8,78 h14 v14 h-14 z"></path>
+<rect height="8" width="8" x="38" y="10"></rect>
+<rect height="8" width="8" x="52" y="10"></rect>
+<rect height="24" width="24" x="38" y="38"></rect>
+<rect height="8" width="8" x="10" y="38"></rect>
+<rect height="8" width="8" x="74" y="38"></rect>
+<rect height="8" width="8" x="38" y="74"></rect>
+<rect height="8" width="8" x="52" y="74"></rect>
+<rect height="16" width="16" x="74" y="74"></rect>
+</svg>
+</div>
+<p class="font-label-code text-label-tag text-outline">扫一扫添加微信 / 请注明来意与机构</p>
+</div>
+</div>
+</div>
+<!-- Vanilla JS Interactions -->
+<script>
+  // 1. Dynamic Typewriter Effect for Hero
+  const typewriterElement = document.getElementById('hero-typewriter');
+  const phrases = [
+    "从 0 到 1 筹建海外交付基地",
+    "国际客户核心交付操盘手",
+    "香港人 · 深耕大湾区连接全球",
+    "大模型评测与具身智能数据闭环"
+  ];
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typeSpeed = 90;
+
+  function typeEffect() {
+    if (!typewriterElement) return;
+    const currentPhrase = phrases[phraseIndex];
+    if (isDeleting) {
+      typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typeSpeed = 40;
+    } else {
+      typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typeSpeed = 90;
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      isDeleting = true;
+      typeSpeed = 2000; // Hold at end
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      typeSpeed = 400;
+    }
+    setTimeout(typeEffect, typeSpeed);
+  }
+  typeEffect();
+
+  // 2. Count-up Animation for Metrics
+  function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      let count = 0;
+      const speed = Math.ceil(target / 40);
+      const update = () => {
+        count += speed;
+        if (count < target) {
+          counter.textContent = count;
+          setTimeout(update, 30);
+        } else {
+          counter.textContent = target;
+        }
+      };
+      update();
+    });
+  }
+  window.addEventListener('DOMContentLoaded', animateCounters);
+
+  // 3. Scrollspy & Elevator & Back-to-Top Logic
+  const sectionIds = ['home', 'about', 'projects', 'insights', 'contact'];
+  const navLinks = document.querySelectorAll('#primary-nav .nav-link');
+  const elevatorItems = document.querySelectorAll('.elevator-item');
+  const backToTopBtn = document.getElementById('back-to-top');
+
+  function updateScrollState() {
+    const scrollPos = window.scrollY || document.documentElement.scrollTop;
+    
+    // 3.1 Reading Progress
+    const h = document.documentElement;
+    const b = document.body;
+    const totalHeight = (h.scrollHeight || b.scrollHeight) - h.clientHeight;
+    const percent = totalHeight > 0 ? (scrollPos / totalHeight) * 100 : 0;
+    const progressBar = document.getElementById('reading-progress');
+    if (progressBar) {
+      progressBar.style.width = Math.min(100, Math.max(0, percent)) + '%';
+    }
+
+    // 3.2 Back to top button visibility
+    if (backToTopBtn) {
+      if (scrollPos > 320) {
+        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+        backToTopBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      } else {
+        backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+      }
+    }
+
+    // 3.3 Scrollspy Active Section Detection (offset for navbar height)
+    let currentActive = 'home';
+    const offset = 180;
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.offsetTop - offset;
+        if (scrollPos >= top) {
+          currentActive = id;
+        }
+      }
+    });
+
+    // Update Header Nav Links
+    navLinks.forEach(link => {
+      const section = link.getAttribute('data-section');
+      if (section === currentActive) {
+        link.classList.remove('text-on-surface-variant', 'border-transparent');
+        link.classList.add('text-primary', 'font-semibold', 'border-primary');
+      } else {
+        link.classList.remove('text-primary', 'font-semibold', 'border-primary');
+        link.classList.add('text-on-surface-variant', 'border-transparent');
+      }
+    });
+
+    // Update Floating Elevator Rail
+    elevatorItems.forEach(item => {
+      const target = item.getAttribute('data-target');
+      const dot = item.querySelector('.elevator-dot');
+      if (target === currentActive) {
+        dot.classList.remove('bg-outline-variant', 'w-2.5', 'h-2.5');
+        dot.classList.add('bg-primary', 'w-3.5', 'h-3.5', 'shadow-[0_0_10px_rgba(180,197,255,0.9)]', 'ring-2', 'ring-primary-container');
+      } else {
+        dot.classList.remove('bg-primary', 'w-3.5', 'h-3.5', 'shadow-[0_0_10px_rgba(180,197,255,0.9)]', 'ring-2', 'ring-primary-container');
+        dot.classList.add('bg-outline-variant', 'w-2.5', 'h-2.5');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateScrollState, { passive: true });
+  window.addEventListener('DOMContentLoaded', updateScrollState);
+
+  // 4. STAR Project Modal Data Store
+  const starData = {
+    'anthropic': {
+      tag: "LLM 评测 · 核心第一梯队",
+      client: "Anthropic / WeRide 国际交付部",
+      title: "Anthropic 首月大模型核心评测交付标杆",
+      situation: "Anthropic 作为全球顶尖基础大模型实验室，对模型对齐与代码能力评测拥有近乎严苛的事实性要求，首期交付要求在 30 天内完成千级高难度场景评测用例的标注质检闭环，且无现成中文-英文对应标注标准。",
+      task: "从零搭建专属专项交付小组，确保 100% 达成 30 天交付里程碑，并将首轮数据通过率稳定在 99% 以上，争取进入核心供应商白名单。",
+      action: "1. 3天内吃透 80+ 页英文官方评分规范，转化为结构化双语 SOP 与易错案例库；<br>2. 实施'初筛-交叉复审-专家仲裁'三阶梯质检引擎，建立代码级语法自动化校验脚本；<br>3. 设立每日与 Anthropic 算法对接团队的时区交接机制，实时澄清边缘歧义 Case。",
+      result: "首月 100% 按期完成交付，综合质量通过率高达 99.4%（远超官方 95% 标准），WeRide 顺利成为 Anthropic 第一梯队战略数据供应商。",
+      learning: "对国际顶尖 AI 机构而言，速度是入场券，而对评测规则边界的精准理解与零返工才是建立深层信任的真正护城河。"
+    },
+    'kl-base': {
+      tag: "海外拓荒 · 基地建设",
+      client: "WeRide 马来西亚交付中心",
+      title: "吉隆坡海外交付基地从 0 到 1 快速筹建",
+      situation: "为承接全球多语种业务扩张与规避数据合规风险，公司决定在马来西亚吉隆坡快速建立海外首个全功能交付基地，当时当地仅有空壳注册，无办公室、无人手、无专用 IT 网络。",
+      task: "本人单人赴吉隆坡拓荒，限时 45 天完成实体选址、法务税务合规、千兆专线部署以及首期 30 人多语种（英语/马来语/中文）团队的招聘实训。",
+      action: "1. 深入吉隆坡核心商务区对比 6 处办公场所，高效谈判锁定交通便利且符合安全资质的职场；<br>2. 联动本地律所与猎头，7天内搭建针对跨文化员工的面试考察模型与薪酬激励方案；<br>3. 引入国内成熟的军事化交付纪律与本土宗教文化包容政策，平稳度过团队磨合期。",
+      result: "历时仅 43 天实现基地通电通网且首批 30 人全员入职并上岗实战，交付启动首月即承接海外两项重点评测项目，实现零违规、零劳动纠纷。",
+      learning: "海外拓荒不仅是物理搬迁，更是管理哲学的本地化转译。尊重当地文化并用清晰的晋升机制赋能，才能打造出最具战斗力的跨国铁军。"
+    },
+    'efficiency': {
+      tag: "人效重构 · 流程智能化",
+      client: "WeRide 标注与评测生态",
+      title: "外包标注与评测团队人效翻倍攻坚战",
+      situation: "由于多模态数据复杂化，第三方外包供应商普遍面临返工率高（一度高达 14%）、人均日吞吐量停滞不前、质检人员疲于奔命等恶性循环瓶颈。",
+      task: "在不增加外包预算的前提下，彻底重构作业流程，将团队整体产出人效提升 80% 以上，并将最终返工率压降至 3% 以内。",
+      action: "1. 拆解作业微动作，将原有一体化重度任务重构为'微流水线'，前置 Python 自动化语法与格式预校验；<br>2. 研发动态抽检权重算法：对高信用标注员降低抽检率至 10%，对新入职或低分段实施 100% 熔断辅导；<br>3. 推行每日可视化效能看板与阶梯绩效激励，消除摸鱼与等待工时。",
+      result: "整体人均产出吞吐量惊人提升 118%，返工率由 14% 陡降至 1.8%，为项目单季度节约直接人力外包成本逾数十万元。",
+      learning: "人效瓶颈往往不是员工态度问题，而是流程断点与反馈延迟。善用智能化预检辅助，能彻底释放人类劳动力的上限。"
+    },
+    'calder': {
+      tag: "具身智能 · 空间数据",
+      client: "Calder / 阿里具身合作线",
+      title: "Calder 具身智能机械臂多模态数据交付",
+      situation: "具身智能对物理世界交互数据的精度要求严苛到毫米级。Calder 机械臂抓取实验需要大量包含多视角 RGB、深度深度图、机械臂关节轨迹以及 3D 点云语义标注的复杂数据集。",
+      task: "操盘空间轨迹与点云的端到端数据交付，确保空间连续性与坐标系对齐公差小于 2mm，满足真实强化学习物理策略训练所需。",
+      action: "1. 与具身算法工程师逐项对齐物理空间标定参数，设计具身专用的多视点时间同步质检规范；<br>2. 组织技术骨干攻克 3D Bounding Box 与连续时序姿态平滑技术，编写轨迹跳变自动告警插件；<br>3. 设立现场标定专人巡检制度，从采集端源头杜绝传感器漂移带来的批次作废。",
+      result: "累计交付高精具身交互数据集逾百小时，数据空间公差均控制在 1.5mm 内，全批次一次性通过 Calder 与阿里具身团队验收，无一退件。",
+      learning: "具身智能数据交付已脱离传统 2D 圈框逻辑，交付负责人必须深度理解空间几何与运动学原理，从算法视角审视数据价值。"
+    },
+    'bodhimind': {
+      tag: "极限吞吐 · 卓越运营",
+      client: "Bodhimind 智能语音",
+      title: "Bodhimind 月 5000 小时多语种交付标杆",
+      situation: "客户急需在季末上线全新多语种语音交互大模型，要求在单月内完成超过 5000 小时的高难度多方口语对话切片、转写与多意图对齐质检，日均吞吐压力极其巨大。",
+      task: "协调吉隆坡与国内双基地协同作战，支撑日均逾 180 小时的高难度音频交付吞吐，确保全流程无拥堵延误。",
+      action: "1. 建立双时区跨国交付'日不落'接力机制，吉隆坡负责白班高密度转写，国内团队负责夜间自动化质检跑批；<br>2. 搭建即时敏捷看板，小时级监控任务堆积水位，动态调用储备兼职专家进行峰值削峰；<br>3. 引入声学模型初筛粗转文本，标注员转为纠偏审核，将单小时音频处理时长压缩 45%。",
+      result: "连续 3 个月超预期达成 5000+ 小时交付峰值，准确率维持在 98.6% 以上，Bodhimind 当年全额续约并颁发'卓越交付伙伴奖'。",
+      learning: "极高并发下的交付是一门精密物流学。建立跨时区接力与削峰填谷机制，是跨国交付团队应对不可预测需求波动的核心法宝。"
+    },
+    'dubai-base': {
+      tag: "经验复用 · 中东枢纽",
+      client: "WeRide 中东（迪拜）运营基地",
+      title: "迪拜海外中东交付基地快速复制落地",
+      situation: "随着 WeRide 获得阿联酋全境自动驾驶牌照，中东本地化业务暴增，亟需在中东核心枢纽迪拜快速复刻吉隆坡交付模式，支撑阿拉伯语及本地特殊路况与交互评测。",
+      task: "提炼吉隆坡拓荒经验为标准化模块，将筹备周期由原先的 45 天进一步压缩至 25-30 天内，实现零摩擦迅速投产。",
+      action: "1. 输出全套《海外交付基地拓荒标准化工具包》（涵盖选址测算、IT架构规范、双语法务模板与招聘漏斗）；<br>2. 远程与现场结合，快速对接迪拜本地化外包伙伴与阿语语言专家库；<br>3. 快速移植自动化数据校验管线，确保迪拜基地与大湾区研发中枢实现无缝加密协同。",
+      result: "仅用时 27 天完成迪拜基地首期投产运营，成功建立全职兼职结合的阿拉伯语核心评测梯队，筹备周期较首个基地缩短近 40%。",
+      learning: "真正的领导力不在于每次亲自救火，而在于将非标的英雄主义拓荒，沉淀为任何人皆可按图索骥的组织确定性资产。"
+    }
+  };
+
+  function openModal(caseKey) {
+    const data = starData[caseKey];
+    if (!data) return;
+
+    document.getElementById('modal-tag').textContent = data.tag;
+    document.getElementById('modal-client').textContent = data.client;
+    document.getElementById('modal-title').textContent = data.title;
+    document.getElementById('modal-situation').textContent = data.situation;
+    document.getElementById('modal-task').textContent = data.task;
+    document.getElementById('modal-action').innerHTML = data.action;
+    document.getElementById('modal-result').textContent = data.result;
+    document.getElementById('modal-learning').textContent = '“' + data.learning + '”';
+
+    const modal = document.getElementById('star-modal');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('star-modal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Close modal when clicking outside
+  document.getElementById('star-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'star-modal') closeModal();
+  });
+
+  // 5. WeChat QR Modal toggle
+  function toggleWechatModal() {
+    const modal = document.getElementById('wechat-modal');
+    modal.classList.toggle('hidden');
+  }
+
+  // 6. Contact Form Simulation
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('form-success-msg');
+    
+    btn.disabled = true;
+    btn.innerHTML = `<span class="material-symbols-outlined text-base animate-spin">refresh</span><span>正在安全提交...</span>`;
+
+    setTimeout(() => {
+      btn.classList.add('hidden');
+      successMsg.classList.remove('hidden');
+      event.target.reset();
+    }, 900);
+  }
+</script></main><footer class="w-full bg-[#0B1220] border-t border-[#1E293B] relative overflow-hidden"><div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin py-space-xl flex flex-col gap-space-lg"><div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg pb-space-lg border-b border-surface-container-highest/60"><div class="flex flex-col gap-space-xs"><div class="flex items-center gap-space-sm"><img alt="TW Monogram Logo" class="h-6 w-auto object-contain opacity-80" src="https://lh3.googleusercontent.com/aida/AEtjO1VvtcoLW3YyNscbkii9dWN0GtuSrZILicnCpsn0NXw3iCVWq_wElgWPeDyVYhpwJC9Yp_XjbQTOjyTokuyhUBAfRbMmeg_bKfUh66n3J5CcKugseX5oE9j-1lD-L4GM-XPYzSHG9UAqgUyQGnjS6UynmaMK96NWvH1JpGuhb2WRZI3SWYT3K-FKBq1VWxNplR5pNS4xr9EYaVM5Ie5-4PRrBzMbRkPWIPJKvIp4feLS9aHW5MfLxH8e35o"><span class="font-headline-sm text-title-md text-on-surface">Teddy Wong · 王天宇</span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-md">Senior Cross-Border Autonomous Systems &amp; Frontier AI Enterprise Delivery Leader. Bridging GBA engineering with global deployment nodes.</p></div><div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md"><div class="inline-flex items-center gap-2 h-7 px-3 rounded-full bg-surface-container-high border border-[#1E293B] font-label-code text-label-tag text-on-surface shadow-[0_0_12px_rgba(16,185,129,0.15)]"><span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span><span class="">Based in Shenzhen · Open to Hong Kong opportunities</span></div></div></div><div class="flex flex-col md:flex-row items-center justify-between gap-space-md text-center md:text-left"><div class="flex items-center gap-space-lg"><a class="font-label-code text-body-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://linkedin.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-base">work</span><span class="">LinkedIn</span></a><a class="font-label-code text-body-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="#contact"><span class="material-symbols-outlined text-base">chat</span><span class="">WeChat</span></a><a class="font-label-code text-body-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="mailto:contact@teddywong.ai"><span class="material-symbols-outlined text-base">alternate_email</span><span class="">Email</span></a><a class="font-label-code text-body-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="https://github.com" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-base">terminal</span><span class="">GitHub</span></a></div><p class="font-label-code text-label-code text-outline">© 2025 Teddy Wong. All rights reserved. Precision Delivery &amp; AI Operations.</p></div></div></footer>
+
+</body></html>
