@@ -82,12 +82,14 @@ export default function StarModal({ caseId, onClose }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 rounded-lg border border-outline-variant/30 bg-surface-container-low p-4">
-          <span className="font-label-code text-label-tag font-semibold text-secondary uppercase">
-            💡 操盘交付心得与方法论沉淀
-          </span>
-          <p className="text-body-sm text-on-surface italic">“{data.learning}”</p>
-        </div>
+        {data.learning ? (
+          <div className="flex flex-col gap-2 rounded-lg border border-outline-variant/30 bg-surface-container-low p-4">
+            <span className="font-label-code text-label-tag font-semibold text-secondary uppercase">
+              做法说明
+            </span>
+            <p className="text-body-sm text-on-surface">{data.learning}</p>
+          </div>
+        ) : null}
 
         <div className="flex justify-end pt-2">
           <button

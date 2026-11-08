@@ -1,4 +1,4 @@
-import { PROJECTS } from '../data/content'
+import { PROJECTS, TRIALS } from '../data/content'
 import Icon from './Icon'
 
 export default function Projects({ onOpenCase }) {
@@ -10,15 +10,14 @@ export default function Projects({ onOpenCase }) {
       <div className="mx-auto max-w-[1280px] px-margin-mobile md:px-margin">
         <div className="mb-space-xl flex max-w-3xl flex-col gap-space-xs">
           <div className="font-label-code inline-flex items-center gap-2 text-label-tag tracking-widest text-primary uppercase">
-            <span>[ 02 / 实战标杆 ]</span>
+            <span>[ 02 / 项目 ]</span>
             <span className="h-px w-8 bg-primary-container" />
           </div>
           <h2 className="text-headline-lg-mobile font-bold tracking-tight text-on-surface md:text-headline-lg">
-            6 大核心战绩 · 全球数据交付与基地建设
+            交付项目
           </h2>
           <p className="text-body-md text-on-surface-variant">
-            点击任意案例卡片查看基于 STAR 模型（Situation, Task, Action,
-            Result）的深度交付复盘与工程方法论。
+            客户名称按履历中的保密要求使用代号。点开卡片可以看背景、任务、做法和结果。
           </p>
         </div>
 
@@ -64,6 +63,14 @@ export default function Projects({ onOpenCase }) {
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-space-lg rounded-xl border border-outline-variant/40 bg-surface-container-low p-space-lg">
+          <p className="font-label-code text-label-tag text-outline">其他试标</p>
+          <ul className="mt-2 flex flex-col gap-1 text-body-sm text-on-surface-variant">
+            {TRIALS.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

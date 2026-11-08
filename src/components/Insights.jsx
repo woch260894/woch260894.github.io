@@ -9,18 +9,18 @@ export default function Insights() {
       <div className="mx-auto max-w-[1280px] px-margin-mobile md:px-margin">
         <div className="mb-space-xl flex max-w-3xl flex-col gap-space-xs">
           <div className="font-label-code inline-flex items-center gap-2 text-label-tag tracking-widest text-secondary uppercase">
-            <span>[ 03 / 战略洞察 ]</span>
+            <span>[ 03 / 核心能力 ]</span>
             <span className="h-px w-8 bg-secondary-container" />
           </div>
           <h2 className="text-headline-lg-mobile font-bold tracking-tight text-on-surface md:text-headline-lg">
-            AI 行业出海与工程交付周报精选
+            核心能力
           </h2>
           <p className="text-body-md text-on-surface-variant">
-            不做二手新闻的搬运工，专注提炼前沿模型演进对企业落地、出海合规与数据供应链的本质启发。
+            基地搭建、报价与毛利、产能质量、三语交付，以及已经在项目里使用的采集平台。
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-space-lg md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-space-lg md:grid-cols-2">
           {INSIGHTS.map((item) => (
             <div
               key={item.title}

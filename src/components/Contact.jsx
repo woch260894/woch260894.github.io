@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CONTACT_TOPICS, PROFILE_IMG } from '../data/content'
+import { CONTACT_TOPICS, EMAIL, JC_URL, PHONE, PHONE_HREF, PROFILE_IMG } from '../data/content'
 import Icon from './Icon'
 
 const initialForm = {
@@ -10,21 +10,16 @@ const initialForm = {
   message: '',
 }
 
-export default function Contact({ onOpenWechat }) {
+export default function Contact() {
   const [form, setForm] = useState(initialForm)
-  const [submitting, setSubmitting] = useState(false)
-  const [success, setSuccess] = useState(false)
 
   const update = (field) => (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }))
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setSubmitting(true)
-    setTimeout(() => {
-      setSubmitting(false)
-      setSuccess(true)
-      setForm(initialForm)
-    }, 900)
+    const topic = CONTACT_TOPICS.find((item) => item.value === form.topic)?.label ?? form.topic
+    const body = [`姓名：${form.name}`, `机构：${form.org}`, `邮箱：${form.email}`, `主题：${topic}`, '', form.message].join('\n')
+    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(`履历咨询 / ${form.name}`)}&body=${encodeURIComponent(body)}`
   }
 
   const fieldClass =
@@ -38,14 +33,14 @@ export default function Contact({ onOpenWechat }) {
       <div className="mx-auto max-w-[1280px] px-margin-mobile md:px-margin">
         <div className="mb-space-xl flex max-w-2xl flex-col gap-space-xs">
           <div className="font-label-code inline-flex items-center gap-2 text-label-tag tracking-widest text-primary uppercase">
-            <span>[ 04 / 携手共赢 ]</span>
+            <span>[ 04 / 联络 ]</span>
             <span className="h-px w-8 bg-primary-container" />
           </div>
           <h2 className="text-headline-lg-mobile font-bold tracking-tight text-on-surface md:text-headline-lg">
-            Let&apos;s Connect · 开启战略交流
+            联络
           </h2>
           <p className="text-body-md text-on-surface-variant">
-            深耕大湾区，放眼全球。热忱期待与香港、深圳及国际 AI 创新团队、具身智能领航者共话业务出海与高质交付。
+            求职意向是海外交付经理 / 海外基地负责人，海外或国内均可。电话、邮箱与履历一致。
           </p>
         </div>
 
@@ -54,17 +49,17 @@ export default function Contact({ onOpenWechat }) {
             <div className="flex flex-col gap-space-md rounded-xl border border-outline-variant/40 bg-surface-container-high p-space-lg shadow-lg">
               <div className="flex items-center gap-space-md">
                 <img
-                  alt="Teddy Wong"
+                  alt="王俊"
                   className="h-16 w-16 rounded-full border-2 border-primary/50 object-cover shadow-md"
                   src={PROFILE_IMG}
                 />
                 <div className="flex flex-col">
-                  <h3 className="text-headline-sm font-bold text-on-surface">Teddy Wong · 王俊</h3>
+                  <h3 className="text-headline-sm font-bold text-on-surface">王俊</h3>
                   <span className="text-body-sm font-medium text-primary">
-                    AI 交付负责人 / 国际基地操盘手
+                    海外交付经理 / 基地负责人
                   </span>
                   <span className="font-label-code mt-0.5 text-label-tag text-outline">
-                    Hong Kong Native · Global Operations
+                    香港永久居民 · 32 岁
                   </span>
                 </div>
               </div>
@@ -72,21 +67,19 @@ export default function Contact({ onOpenWechat }) {
               <div className="flex items-start gap-2.5 rounded-lg border border-outline-variant/30 bg-surface-container p-3">
                 <Icon name="pin_drop" className="mt-0.5 text-lg text-secondary" />
                 <div className="flex flex-col text-body-sm text-on-surface-variant">
-                  <span className="font-medium text-on-surface">📍 常驻深圳 · 随时可赴香港开展工作</span>
-                  <span>开放香港 / 大湾区 AI 运营交付总监及出海基地统筹机会</span>
+                  <span className="font-medium text-on-surface">现居深圳，可常驻香港</span>
+                  <span>海外 / 国内岗位都可以谈</span>
                 </div>
               </div>
 
               <div className="flex flex-col gap-space-sm pt-2">
                 <a
                   className="group flex items-center justify-between rounded border border-outline-variant/30 bg-surface p-3 transition-colors hover:bg-surface-variant"
-                  href="mailto:contact@teddywong.ai"
+                  href={`mailto:${EMAIL}`}
                 >
                   <div className="flex items-center gap-2.5">
                     <Icon name="mail" className="text-lg text-primary" />
-                    <span className="font-label-code text-body-sm text-on-surface">
-                      contact@teddywong.ai
-                    </span>
+                    <span className="font-label-code text-body-sm text-on-surface">{EMAIL}</span>
                   </div>
                   <Icon
                     name="arrow_outward"
@@ -95,45 +88,42 @@ export default function Contact({ onOpenWechat }) {
                 </a>
                 <a
                   className="group flex items-center justify-between rounded border border-outline-variant/30 bg-surface p-3 transition-colors hover:bg-surface-variant"
-                  href="https://linkedin.com"
-                  rel="noopener noreferrer"
-                  target="_blank"
+                  href={PHONE_HREF}
                 >
                   <div className="flex items-center gap-2.5">
-                    <Icon name="work" className="text-lg text-secondary" />
-                    <span className="font-label-code text-body-sm text-on-surface">
-                      LinkedIn Profile (Teddy Wong)
-                    </span>
+                    <Icon name="call" className="text-lg text-secondary" />
+                    <span className="font-label-code text-body-sm text-on-surface">{PHONE}</span>
                   </div>
                   <Icon
                     name="arrow_outward"
                     className="text-base text-outline transition-colors group-hover:text-secondary"
                   />
                 </a>
-                <button
-                  type="button"
-                  className="group flex cursor-pointer items-center justify-between rounded border border-outline-variant/30 bg-surface p-3 text-left transition-colors hover:bg-surface-variant"
-                  onClick={onOpenWechat}
+                <a
+                  className="group flex items-center justify-between rounded border border-outline-variant/30 bg-surface p-3 transition-colors hover:bg-surface-variant"
+                  href={JC_URL}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <div className="flex items-center gap-2.5">
-                    <Icon name="chat" className="text-lg text-emerald-400" />
+                    <Icon name="dataset" className="text-lg text-emerald-400" />
                     <span className="font-label-code text-body-sm text-on-surface">
-                      WeChat / 微信二维码即刻沟通
+                      JC Collection 采集管理平台
                     </span>
                   </div>
                   <Icon
-                    name="qr_code_2"
+                    name="arrow_outward"
                     className="text-base text-outline transition-colors group-hover:text-emerald-400"
                   />
-                </button>
+                </a>
               </div>
 
               <a
                 className="flex w-full items-center justify-center gap-2 rounded border border-outline-variant/50 bg-surface-variant py-2.5 text-body-sm text-on-surface transition-colors hover:bg-outline-variant/40"
-                href="mailto:contact@teddywong.ai?subject=Request%20Teddy%20Wong%20CV"
+                href={`mailto:${EMAIL}?subject=${encodeURIComponent('关于王俊的履历')}`}
               >
-                <Icon name="download" className="text-base" />
-                <span>获取完整中英文 PDF 履历</span>
+                <Icon name="mail" className="text-base" />
+                <span>发邮件索取 PDF 履历</span>
               </a>
             </div>
           </div>
@@ -142,10 +132,10 @@ export default function Contact({ onOpenWechat }) {
             <div className="rounded-xl border border-outline-variant/40 bg-surface-container-high p-space-lg shadow-lg md:p-8">
               <h3 className="flex items-center gap-2 text-title-md font-semibold text-on-surface">
                 <Icon name="send" className="text-xl text-primary" />
-                <span>预约沟通 / 战略简报咨询</span>
+                <span>写一封邮件</span>
               </h3>
               <p className="mt-1 mb-space-lg text-body-sm text-on-surface-variant">
-                请填写您的联系需求，我将在 12 小时内亲自回复或安排电话会议。
+                提交后会打开你的邮件软件，收件人是 {EMAIL}。
               </p>
 
               <form className="flex flex-col gap-space-md" onSubmit={handleSubmit}>
@@ -228,32 +218,14 @@ export default function Contact({ onOpenWechat }) {
                   <span className="font-label-code text-label-tag text-outline">
                     🔒 严格保护信息与商业隐私
                   </span>
-                  {!success && (
-                    <button
-                      type="submit"
-                      disabled={submitting}
-                      className="inline-flex h-10 items-center gap-2 rounded bg-primary-container px-space-lg text-body-sm text-on-primary-container transition-all hover:bg-inverse-primary disabled:opacity-70"
-                    >
-                      {submitting ? (
-                        <>
-                          <Icon name="refresh" className="animate-spin text-base" />
-                          <span>正在安全提交...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>立即发送信息</span>
-                          <Icon name="send" className="text-base" />
-                        </>
-                      )}
-                    </button>
-                  )}
+                  <button
+                    type="submit"
+                    className="inline-flex h-10 items-center gap-2 rounded bg-primary-container px-space-lg text-body-sm text-on-primary-container transition-all hover:bg-inverse-primary"
+                  >
+                    <span>用邮件发送</span>
+                    <Icon name="send" className="text-base" />
+                  </button>
                 </div>
-
-                {success && (
-                  <div className="rounded border border-emerald-500/40 bg-emerald-950/60 p-3 text-center text-body-sm text-emerald-400">
-                    ✅ 感谢您的留言！消息已成功发送至 Teddy 的优先收件箱，将尽快与您取得联系。
-                  </div>
-                )}
               </form>
             </div>
           </div>

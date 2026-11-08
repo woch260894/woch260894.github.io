@@ -1,4 +1,4 @@
-import { LOGO_IMG } from '../data/content'
+import { EMAIL, JC_URL } from '../data/content'
 import Icon from './Icon'
 
 export default function Footer() {
@@ -8,21 +8,18 @@ export default function Footer() {
         <div className="flex flex-col items-start justify-between gap-space-lg border-b border-surface-container-highest/60 pb-space-lg md:flex-row md:items-center">
           <div className="flex flex-col gap-space-xs">
             <div className="flex items-center gap-space-sm">
-              <img
-                alt="TW Monogram Logo"
-                className="h-6 w-auto object-contain opacity-80"
-                src={LOGO_IMG}
-              />
-              <span className="text-title-md text-on-surface">Teddy Wong · 王天宇</span>
+              <span className="flex h-6 w-6 items-center justify-center rounded bg-primary-container text-[12px] font-semibold text-on-primary-container">
+                王
+              </span>
+              <span className="text-title-md text-on-surface">王俊 · 海外交付经理</span>
             </div>
             <p className="max-w-md text-body-sm text-on-surface-variant">
-              Senior Cross-Border Autonomous Systems & Frontier AI Enterprise Delivery Leader.
-              Bridging GBA engineering with global deployment nodes.
+              香港永久居民，现居深圳，可常驻香港。海外交付与基地运营，具身数据采集、标注验收与跨文化团队管理。
             </p>
           </div>
           <div className="font-label-code inline-flex h-7 items-center gap-2 rounded-full border border-[#1E293B] bg-surface-container-high px-3 text-label-tag text-on-surface shadow-[0_0_12px_rgba(16,185,129,0.15)]">
             <span className="h-2 w-2 animate-pulse rounded-full bg-[#10B981]" />
-            <span>Based in Shenzhen · Open to Hong Kong opportunities</span>
+            <span>深圳 · 可常驻香港 · 海外 / 国内均可</span>
           </div>
         </div>
 
@@ -30,30 +27,23 @@ export default function Footer() {
           <div className="flex items-center gap-space-lg">
             <a
               className="font-label-code flex items-center gap-1 text-body-sm text-on-surface-variant transition-colors hover:text-primary"
-              href="https://linkedin.com"
+              href={JC_URL}
               rel="noopener noreferrer"
               target="_blank"
             >
               <Icon name="work" className="text-base" />
-              <span>LinkedIn</span>
+              <span>JC Collection</span>
             </a>
             <a
               className="font-label-code flex items-center gap-1 text-body-sm text-on-surface-variant transition-colors hover:text-primary"
-              href="#contact"
-            >
-              <Icon name="chat" className="text-base" />
-              <span>WeChat</span>
-            </a>
-            <a
-              className="font-label-code flex items-center gap-1 text-body-sm text-on-surface-variant transition-colors hover:text-primary"
-              href="mailto:contact@teddywong.ai"
+              href={`mailto:${EMAIL}`}
             >
               <Icon name="alternate_email" className="text-base" />
               <span>Email</span>
             </a>
             <a
               className="font-label-code flex items-center gap-1 text-body-sm text-on-surface-variant transition-colors hover:text-primary"
-              href="https://github.com"
+              href="https://github.com/woch260894"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -62,7 +52,7 @@ export default function Footer() {
             </a>
           </div>
           <p className="font-label-code text-label-code text-outline">
-            © 2025 Teddy Wong. All rights reserved. Precision Delivery & AI Operations.
+            © 2026 王俊. 海外交付经理 / 基地负责人.
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { LOGO_IMG, NAV_LINKS, PROFILE_IMG } from '../data/content'
+import { NAV_LINKS, PROFILE_IMG } from '../data/content'
 import Icon from './Icon'
 
 export default function Header({ activeId }) {
@@ -39,16 +39,18 @@ export default function Header({ activeId }) {
     >
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-space-md px-margin-mobile md:px-margin">
         <div className="flex min-w-0 items-center gap-space-sm">
-          <img alt="TW Monogram Logo" className="h-8 w-auto shrink-0 object-contain" src={LOGO_IMG} />
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-primary-container text-body-sm font-semibold text-on-primary-container">
+            王
+          </span>
           <a className="group flex min-w-0 flex-col" href="#home" onClick={closeMenu}>
             <span className="flex items-center gap-space-xs truncate text-title-md font-semibold tracking-tight text-on-surface">
-              Teddy Wong <span className="hidden font-normal text-outline sm:inline">|</span>{' '}
+              王俊 <span className="hidden font-normal text-outline sm:inline">|</span>{' '}
               <span className="hidden text-body-sm font-medium text-primary transition-colors group-hover:text-tertiary sm:inline">
-                AI Delivery
+                海外交付
               </span>
             </span>
             <span className="font-label-code hidden text-label-code tracking-widest text-on-surface-variant uppercase lg:block">
-              Cross-Border Enterprise Systems
+              基地负责人 · 深圳 / 香港
             </span>
           </a>
         </div>
@@ -72,7 +74,7 @@ export default function Header({ activeId }) {
             href="#contact"
             onClick={closeMenu}
           >
-            下载简历
+            联系我
           </a>
           <img
             alt="Profile"
@@ -127,7 +129,7 @@ export default function Header({ activeId }) {
             onClick={closeMenu}
             className="mt-2 inline-flex h-11 items-center justify-center rounded bg-primary-container px-space-md text-body-sm font-medium text-on-primary-container"
           >
-            下载简历 / Download Resume
+            联系我
           </a>
         </nav>
       </div>

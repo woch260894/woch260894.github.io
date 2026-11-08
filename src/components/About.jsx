@@ -9,15 +9,14 @@ export default function About() {
       <div className="mx-auto max-w-[1280px] px-margin-mobile md:px-margin">
         <div className="mb-space-xl flex max-w-3xl flex-col gap-space-xs">
           <div className="font-label-code inline-flex items-center gap-2 text-label-tag tracking-widest text-secondary uppercase">
-            <span>[ 01 / 跨界自驱力 ]</span>
+            <span>[ 01 / 工作与教育 ]</span>
             <span className="h-px w-8 bg-secondary-container" />
           </div>
           <h2 className="text-headline-lg-mobile font-bold tracking-tight text-on-surface md:text-headline-lg">
-            跨界履历时间线 · 终身学习者与破局者
+            履历时间线
           </h2>
           <p className="text-body-md text-on-surface-variant">
-            跨界不是偏离，而是将超五星服务敏锐度、大宗商业谈判力、高压创业韧性与自驱 AI
-            全栈能力融会贯通，塑造成今日极速破局、敢打硬仗的国际交付操盘手。
+            从当前岗位往前排。香港永久居民，现居深圳，可常驻香港。教育是瑞士酒店管理大学与英国德比大学双学位。
           </p>
         </div>
 

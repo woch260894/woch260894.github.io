@@ -1,4 +1,4 @@
-import { PROFILE_IMG, STATS, TYPEWRITER_PHRASES } from '../data/content'
+import { JC_URL, PROFILE_IMG, STATS, TYPEWRITER_PHRASES } from '../data/content'
 import { useCountUp } from '../hooks/useCountUp'
 import { useTypewriter } from '../hooks/useTypewriter'
 import Icon from './Icon'
@@ -35,7 +35,7 @@ export default function Hero() {
         <div className="mb-space-lg inline-flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container-high px-3 py-1.5 text-on-surface shadow-sm">
           <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-secondary-container" />
           <span className="font-label-code text-label-tag tracking-wider text-on-surface uppercase">
-            🇭🇰 香港人 · AI 数据交付 · 跨文化团队管理
+            香港永久居民 · 现居深圳 · 可常驻香港
           </span>
         </div>
 
@@ -43,8 +43,8 @@ export default function Hero() {
           <div className="flex flex-col items-start gap-space-md lg:col-span-7">
             <div className="flex flex-col gap-space-xs">
               <h1 className="text-headline-lg-mobile font-bold tracking-tight text-on-surface md:text-headline-lg">
-                Teddy Wong <span className="font-normal text-primary">|</span>{' '}
-                <span className="text-tertiary">AI Delivery Lead</span>
+                王俊 <span className="font-normal text-primary">|</span>{' '}
+                <span className="text-tertiary">海外交付经理</span>
               </h1>
               <div className="flex h-8 items-center">
                 <span className="font-label-code text-body-md font-medium tracking-wide text-secondary">
@@ -55,10 +55,8 @@ export default function Hero() {
             </div>
 
             <p className="mt-space-xs max-w-2xl text-body-md leading-relaxed text-on-surface-variant md:text-body-lg">
-              深耕自动驾驶与具身智能全球化数据闭环，曾操盘 WeRide
-              国际头部客户交付（Anthropic、小红书、Calder、阿里具身），带领跨文化 50+
-              人多语种团队建立吉隆坡与迪拜海外基地，致力于为下一代具身与通用 AI
-              打造极速、可靠的出海交付引擎。
+              现任广州景烁数据科技（文远知行全资子公司）海外交付经理。负责吉隆坡基地从 0
+              到 1、工厂与 ego 具身数据采集，以及海外 ASR / 视频评测。此前在香港有光科技负责恒生银行与国泰航空的智能客服项目。求职方向：海外交付经理 / 海外基地负责人，海外或国内均可。
             </p>
 
             <div className="flex flex-wrap items-center gap-space-md pt-space-sm">
@@ -67,28 +65,33 @@ export default function Hero() {
                 href="#projects"
               >
                 <Icon name="explore" className="text-lg" />
-                <span>探索核心战绩</span>
+                <span>查看项目</span>
               </a>
               <a
                 className="inline-flex h-11 items-center gap-2 rounded border border-outline-variant/60 bg-surface-container-high px-space-lg text-body-sm text-on-surface transition-all duration-200 hover:bg-surface-bright"
                 href="#contact"
               >
                 <Icon name="chat_bubble" className="text-lg" />
-                <span>获取战略简报 / 联系我</span>
+                <span>联系我</span>
               </a>
             </div>
 
             <div className="font-label-code mt-space-sm flex items-center gap-space-sm text-body-sm text-on-surface-variant">
               <Icon name="public" className="text-base text-primary" />
-              <span>Fluent in Cantonese (母语) / English (工作熟练) / Mandarin (流利)</span>
+              <span>
+                普通话 / 英语 / 粤语 ·{' '}
+                <a className="text-primary hover:underline" href={JC_URL} target="_blank" rel="noreferrer">
+                  JC Collection
+                </a>
+              </span>
             </div>
           </div>
 
           <div className="relative flex justify-center lg:col-span-5 lg:justify-end">
             <div className="group relative aspect-square w-72 overflow-hidden rounded-xl border border-outline-variant/40 bg-surface-container-low shadow-2xl sm:w-80 md:w-96">
               <img
-                alt="Teddy Wong Executive Portrait"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                alt="王俊"
+                className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 src={PROFILE_IMG}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-dim via-transparent to-transparent opacity-80" />
@@ -99,10 +102,10 @@ export default function Hero() {
                 </span>
                 <div className="flex min-w-0 flex-col">
                   <span className="truncate text-body-sm font-semibold text-on-surface">
-                    开放香港 AI 运营/交付负责人机会
+                    开放海外交付 / 基地负责人机会
                   </span>
                   <span className="font-label-code text-label-tag text-on-surface-variant">
-                    Senior Lead · Autonomous & AI Operations
+                    32 岁 · 入职首年 20% 加薪 · 季度之星
                   </span>
                 </div>
               </div>
@@ -110,7 +113,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mt-space-xl grid grid-cols-1 gap-space-lg md:grid-cols-3">
+        <div className="mt-space-xl grid grid-cols-1 gap-space-lg md:grid-cols-2 xl:grid-cols-4">
           {STATS.map((stat) => (
             <StatCard key={stat.node} stat={stat} />
           ))}
