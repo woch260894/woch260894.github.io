@@ -1,7 +1,9 @@
-import { PROJECTS, TRIALS } from '../data/content'
+import { useLocale } from '../i18n/LanguageContext'
 import Icon from './Icon'
 
 export default function Projects({ onOpenCase }) {
+  const { copy } = useLocale()
+  const { ui } = copy
   return (
     <section
       className="w-full border-t border-outline-variant/30 bg-surface py-space-xl scroll-mt-24"
@@ -10,19 +12,17 @@ export default function Projects({ onOpenCase }) {
       <div className="mx-auto max-w-[1280px] px-margin-mobile md:px-margin">
         <div className="mb-space-xl flex max-w-3xl flex-col gap-space-xs">
           <div className="font-label-code inline-flex items-center gap-2 text-label-tag tracking-widest text-primary uppercase">
-            <span>[ 02 / 项目 ]</span>
+            <span>{ui.projectsKicker}</span>
             <span className="h-px w-8 bg-primary-container" />
           </div>
           <h2 className="text-headline-lg-mobile font-bold tracking-tight text-on-surface md:text-headline-lg">
-            交付项目
+            {ui.projectsTitle}
           </h2>
-          <p className="text-body-md text-on-surface-variant">
-            客户名称按履历中的保密要求使用代号。点开卡片可以看背景、任务、做法和结果。
-          </p>
+          <p className="text-body-md text-on-surface-variant">{ui.projectsLead}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-space-lg md:grid-cols-2 lg:grid-cols-3">
-          {PROJECTS.map((project) => (
+          {copy.projects.map((project) => (
             <div
               key={project.id}
               className={`group flex flex-col justify-between rounded-xl border border-outline-variant/40 bg-surface-container-high p-space-lg transition-all duration-300 hover:-translate-y-1 ${project.hoverBorder}`}
@@ -43,21 +43,16 @@ export default function Projects({ onOpenCase }) {
                 >
                   {project.title}
                 </h3>
-                <p className="text-body-sm leading-relaxed text-on-surface-variant">{project.desc}</p>
+                <p className={`font-label-code text-body-md font-semibold ${project.resultColor}`}>{project.result}</p>
               </div>
-              <div className="mt-space-lg flex items-center justify-between border-t border-outline-variant/30 pt-space-md">
-                <div className="flex flex-col">
-                  <span className="font-label-code text-label-tag text-outline">交付结果</span>
-                  <span className={`text-title-md font-bold ${project.resultColor}`}>
-                    {project.result}
-                  </span>
-                </div>
+              <div className="mt-space-md flex items-center justify-between border-t border-outline-variant/30 pt-space-md">
+                <span className="font-label-code text-label-tag text-outline">{ui.resultLabel}</span>
                 <button
                   type="button"
                   className="font-label-code inline-flex cursor-pointer items-center gap-1 text-body-sm text-secondary hover:underline"
                   onClick={() => onOpenCase(project.id)}
                 >
-                  <span>STAR 复盘</span>
+                  <span>{ui.caseLink}</span>
                   <Icon name="arrow_forward" className="text-base" />
                 </button>
               </div>
@@ -65,9 +60,9 @@ export default function Projects({ onOpenCase }) {
           ))}
         </div>
         <div className="mt-space-lg rounded-xl border border-outline-variant/40 bg-surface-container-low p-space-lg">
-          <p className="font-label-code text-label-tag text-outline">其他试标</p>
+          <p className="font-label-code text-label-tag text-outline">{ui.trialsTitle}</p>
           <ul className="mt-2 flex flex-col gap-1 text-body-sm text-on-surface-variant">
-            {TRIALS.map((line) => (
+            {copy.trials.map((line) => (
               <li key={line}>{line}</li>
             ))}
           </ul>

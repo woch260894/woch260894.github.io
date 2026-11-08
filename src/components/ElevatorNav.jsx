@@ -1,13 +1,14 @@
-import { ELEVATOR_LINKS } from '../data/content'
+import { useLocale } from '../i18n/LanguageContext'
 
 export default function ElevatorNav({ activeId }) {
+  const { copy } = useLocale()
   return (
     <aside
-      aria-label="楼层电梯导航"
+      aria-label={copy.ui.elevatorLabel}
       className="pointer-events-auto fixed top-1/2 right-4 z-40 hidden -translate-y-1/2 flex-col items-end gap-3 lg:flex sm:right-6"
     >
       <div className="flex flex-col items-center gap-4 rounded-full border border-outline-variant/50 bg-surface-container-high/80 px-2 py-3 shadow-xl backdrop-blur-md">
-        {ELEVATOR_LINKS.map((item, index) => {
+        {copy.elevatorLinks.map((item, index) => {
           const active = activeId === item.id
           return (
             <div key={item.id} className="flex flex-col items-center gap-4">

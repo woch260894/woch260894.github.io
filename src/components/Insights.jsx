@@ -1,6 +1,8 @@
-import { INSIGHTS } from '../data/content'
+import { useLocale } from '../i18n/LanguageContext'
 
 export default function Insights() {
+  const { copy } = useLocale()
+  const { ui } = copy
   return (
     <section
       className="w-full border-t border-outline-variant/30 bg-surface-container-low py-space-xl scroll-mt-24"
@@ -9,19 +11,17 @@ export default function Insights() {
       <div className="mx-auto max-w-[1280px] px-margin-mobile md:px-margin">
         <div className="mb-space-xl flex max-w-3xl flex-col gap-space-xs">
           <div className="font-label-code inline-flex items-center gap-2 text-label-tag tracking-widest text-secondary uppercase">
-            <span>[ 03 / 核心能力 ]</span>
+            <span>{ui.skillsKicker}</span>
             <span className="h-px w-8 bg-secondary-container" />
           </div>
           <h2 className="text-headline-lg-mobile font-bold tracking-tight text-on-surface md:text-headline-lg">
-            核心能力
+            {ui.skillsTitle}
           </h2>
-          <p className="text-body-md text-on-surface-variant">
-            基地搭建、报价与毛利、产能质量、三语交付，以及已经在项目里使用的采集平台。
-          </p>
+          <p className="text-body-md text-on-surface-variant">{ui.skillsLead}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-space-lg md:grid-cols-2">
-          {INSIGHTS.map((item) => (
+          {copy.insights.map((item) => (
             <div
               key={item.title}
               className={`flex flex-col justify-between rounded-xl border border-outline-variant/40 bg-surface-container p-space-lg transition-all duration-300 ${item.hoverBorder}`}
@@ -34,13 +34,20 @@ export default function Insights() {
                   <span className="font-label-code text-label-tag text-outline">{item.meta}</span>
                 </div>
                 <h3 className="text-title-md leading-snug font-bold text-on-surface">{item.title}</h3>
-                <p className="text-body-sm leading-relaxed text-on-surface-variant">{item.desc}</p>
+                <ul className="flex flex-col gap-1.5">
+                  {item.points.map((point) => (
+                    <li key={point} className="flex gap-2 text-body-md text-on-surface">
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
               <div
                 className={`mt-space-lg rounded-lg border-l-2 bg-surface-container-high p-3 ${item.calloutBorder}`}
               >
                 <span className={`font-label-code mb-1 block text-label-tag ${item.calloutLabel}`}>
-                  对企业出海交付的启发：
+                  {ui.noteLabel}
                 </span>
                 <p className="text-body-sm text-on-surface-variant">{item.callout}</p>
               </div>

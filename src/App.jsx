@@ -10,11 +10,12 @@ import Insights from './components/Insights'
 import Projects from './components/Projects'
 import ReadingProgress from './components/ReadingProgress'
 import StarModal from './components/StarModal'
-import { NAV_LINKS } from './data/content'
+import { useLocale } from './i18n/LanguageContext'
 import { useScrollSpy } from './hooks/useScrollSpy'
 
 function App() {
-  const sectionIds = useMemo(() => NAV_LINKS.map((link) => link.id), [])
+  const { copy } = useLocale()
+  const sectionIds = useMemo(() => copy.navLinks.map((link) => link.id), [copy.navLinks])
   const { activeId, progress, showBackToTop } = useScrollSpy(sectionIds)
   const [activeCase, setActiveCase] = useState(null)
 

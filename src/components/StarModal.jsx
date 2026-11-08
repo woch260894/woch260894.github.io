@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
-import { STAR_CASES } from '../data/content'
+import { useLocale } from '../i18n/LanguageContext'
 import Icon from './Icon'
 
 export default function StarModal({ caseId, onClose }) {
-  const data = caseId ? STAR_CASES[caseId] : null
+  const { copy } = useLocale()
+  const { ui } = copy
+  const data = caseId ? copy.starCases[caseId] : null
 
   useEffect(() => {
     if (!data) return undefined
@@ -50,19 +52,19 @@ export default function StarModal({ caseId, onClose }) {
         <div className="flex flex-col gap-4">
           <div className="rounded-lg border-l-4 border-primary bg-surface-container p-3.5">
             <span className="font-label-code text-label-tag font-bold text-primary">
-              S · 业务背景 (Situation)
+              {ui.starS}
             </span>
             <p className="mt-1 text-body-sm leading-relaxed text-on-surface-variant">{data.situation}</p>
           </div>
           <div className="rounded-lg border-l-4 border-secondary bg-surface-container p-3.5">
             <span className="font-label-code text-label-tag font-bold text-secondary">
-              T · 核心任务 (Task)
+              {ui.starT}
             </span>
             <p className="mt-1 text-body-sm leading-relaxed text-on-surface-variant">{data.task}</p>
           </div>
           <div className="rounded-lg border-l-4 border-tertiary bg-surface-container p-3.5">
             <span className="font-label-code text-label-tag font-bold text-tertiary">
-              A · 关键行动 (Action)
+              {ui.starA}
             </span>
             <div className="mt-1 space-y-1 text-body-sm leading-relaxed text-on-surface-variant">
               {data.action.map((step, i) => (
@@ -74,7 +76,7 @@ export default function StarModal({ caseId, onClose }) {
           </div>
           <div className="rounded-lg border-l-4 border-emerald-400 bg-surface-container p-3.5">
             <span className="font-label-code text-label-tag font-bold text-emerald-400">
-              R · 交付成果 (Result)
+              {ui.starR}
             </span>
             <p className="mt-1 text-body-sm leading-relaxed font-semibold text-on-surface-variant">
               {data.result}
@@ -97,7 +99,7 @@ export default function StarModal({ caseId, onClose }) {
             className="rounded bg-surface-container px-5 py-2 text-body-sm font-medium text-on-surface transition-colors hover:bg-surface-variant"
             onClick={onClose}
           >
-            关闭复盘
+            {ui.closeCase}
           </button>
         </div>
       </div>
